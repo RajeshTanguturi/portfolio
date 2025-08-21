@@ -1,0 +1,26 @@
+/* Import a fun, modern font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Poppins', sans-serif;
+  
+  /* The new gradient background! */
+  background-color: #1a1a2e;
+  background-image: radial-gradient(circle at 1px 1px, #16213e 1px, transparent 0);
+  background-size: 20px 20px;
+
+  color: #e0e0e0; /* Default text color */
+}
+
+/* A helper class for cool gradient text */
+.text-gradient {
+  background: linear-gradient(90deg, #e94560, #00f5d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}

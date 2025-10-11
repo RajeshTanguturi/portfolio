@@ -33,7 +33,7 @@ const About = ({ theme }) => {
                         transition={{ type: 'spring', stiffness: 300 }}
                     >
                         <img 
-                            src="/profile.jpg"
+                            src="/assets/profilepicture.jpg"
                             alt="Rajesh Tanguturi" 
                             onError={(e) => { e.currentTarget.src = 'https://placehold.co/300x300/111827/7DD3FC?text=Your\\nPhoto'; }}
                             className="w-full h-full object-cover"

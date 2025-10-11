@@ -8,6 +8,7 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import {useState, useEffect} from "react";
+import { Analytics } from "@vercel/analytics/react"
 const App = () => {
   const [theme, setTheme] = useState('dark');
 
@@ -26,6 +27,7 @@ const App = () => {
 
   return (
     <div>
+      <Analytics />
       <div className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 font-sans leading-normal tracking-tight transition-colors duration-500">
         <Header theme={theme} toggleTheme={toggleTheme} />
         <main className="container mx-auto px-6 md:px-12 lg:px-24">

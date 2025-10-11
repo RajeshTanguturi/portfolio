@@ -11,16 +11,12 @@ const Hero = ({ theme }) => {
 
     return (
         <motion.section 
-            id="home" 
-            className="min-h-screen flex flex-col justify-center items-start relative overflow-hidden"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-        >
-            {/* Enhanced background gradients */}
-            <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-bl from-cyan-400/30 via-purple-400/20 to-transparent -z-10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-gradient-to-tr from-cyan-500/20 to-transparent -z-10 rounded-full blur-3xl"></div>
-            
+    id="home" 
+    className="min-h-screen flex flex-col justify-center items-start relative z-0 overflow-hidden"
+>
+    <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-bl from-cyan-400/30 via-purple-400/20 to-transparent -z-10 rounded-full blur-3xl pointer-events-none"></div>
+    <div className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-gradient-to-tr from-cyan-500/20 to-transparent -z-10 rounded-full blur-3xl pointer-events-none"></div>
+
             <div className="max-w-3xl relative z-10">
                 <motion.h2 className="text-lg md:text-xl text-cyan-400 font-mono" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2, duration: 0.5 }}>Hi, my name is</motion.h2>
                 <motion.h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 dark:text-white mt-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 0.5 }}>
@@ -57,7 +53,9 @@ const Hero = ({ theme }) => {
                         View Resume
                     </motion.button>
                 </div>
+
             </div>
+               
             
             {/* Resume Modal */}
             <ResumeModal 

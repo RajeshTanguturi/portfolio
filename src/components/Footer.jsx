@@ -1,38 +1,19 @@
-// src/components/Footer.js
 import React from 'react';
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { GitHubIcon, LinkedInIcon, TwitterIcon } from './Icons';
 
-const Footer = () => {
-    // Remember to replace '#' with your actual social media profile URLs
-    const socialLinks = [
-        { icon: <FaGithub />, url: 'https://github.com/your-username' },
-        { icon: <FaLinkedin />, url: 'https://linkedin.com/in/your-username' },
-        { icon: <FaTwitter />, url: 'https://twitter.com/your-username' },
-    ];
-
-    return (
-        <footer className="bg-primary py-8 px-4 sm:px-6 lg:px-8 border-t border-t-gray-800">
-            <div className="container mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left">
-                <p className="text-secondary mb-4 md:mb-0">
-                    &copy; {new Date().getFullYear()} YourName. All rights reserved.
-                </p>
-                <div className="flex space-x-6">
-                    {socialLinks.map((link, index) => (
-                        <a 
-                            key={index} 
-                            href={link.url} 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="text-secondary hover:text-white transition-transform duration-300 hover:scale-110"
-                        >
-                            {/* Clones the icon element to add size property */}
-                            {React.cloneElement(link.icon, { size: 24 })}
-                        </a>
-                    ))}
-                </div>
-            </div>
-        </footer>
-    );
-};
+const Footer = ({ theme }) => (
+  <footer className="py-8">
+    <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+       <div className="flex space-x-6">
+            <a href="#" className="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white transition-colors"><GitHubIcon /></a>
+            <a href="#" className="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white transition-colors"><LinkedInIcon /></a>
+            <a href="#" className="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white transition-colors"><TwitterIcon /></a>
+        </div>
+      <p className="text-gray-400 dark:text-gray-500 mt-4 md:mt-0 font-mono text-sm">
+        Designed & Built by Rajesh Tanguturi
+      </p>
+    </div>
+  </footer>
+);
 
 export default Footer;

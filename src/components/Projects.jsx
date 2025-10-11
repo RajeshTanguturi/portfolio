@@ -1,96 +1,83 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { GitHubIcon, ExternalLinkIcon } from './Icons';
 
-// Import your project images
-import project1Img from '../assets/projects/project1.png';
-import project2Img from '../assets/projects/project2.png';
-import project3Img from '../assets/projects/project3.png';
+const Projects = ({ theme }) => {
+  const projectData = [
+    {
+      title: 'Medical-Report-Generator',
+      description: 'A deep learning application that automatically creates captions for medical images. Utilizing sophisticated neural networks like InceptionV3 and LSTM, this tool analyzes medical images to generate detailed captions, assisting in the interpretation and documentation of medical observations.',
+      tech: ['Computer Vision', 'MERN Stack', 'Deep Learning', 'TensorFlow', 'Neural Networks', 'InceptionV3', 'LSTM'],
+      liveUrl: '#',
+      githubUrl: 'https://github.com/RajeshTanguturi/Medical-Image-Captioning-Chest-X-rays',
+      period: 'Apr 2024 - Jul 2024',
+    },
+    {
+      title: 'TyreGuard: Intelligent Tyre Condition Analyzer',
+      description: 'Built using MERN stack, Flask, and TensorFlow, TyreGuard analyzes tyre conditions at tollgates by capturing images and linking reports to vehicle numbers. Achieved 90%+ accuracy using CNNs for image analysis, with seamless backend integration via Flask.',
+      tech: ['Computer Vision', 'MERN Stack', 'Flask', 'TensorFlow', 'CNN', 'Image Analysis'],
+      liveUrl: '#',
+      githubUrl: 'https://github.com/RajeshTanguturi/TiresOnHighways',
+      period: 'Oct 2023 - Feb 2024',
+    },
+  ];
 
-const projects = [
-  {
-    title: "E-Commerce Platform",
-    description: "A full-featured e-commerce site with product listings, a shopping cart, and a checkout process.",
-    image: project1Img,
-    tags: ["React", "Node.js", "MongoDB", "TailwindCSS"],
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    title: "Task Management App",
-    description: "A web application to manage tasks with features like drag-and-drop, deadlines, and user authentication.",
-    image: project2Img,
-    tags: ["Vue.js", "Firebase", "SCSS"],
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    title: "Portfolio Website",
-    description: "The very website you are looking at, built with a focus on minimalistic design and smooth animations.",
-    image: project3Img,
-    tags: ["React", "Framer Motion", "TailwindCSS"],
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-];
+  const containerVariants = {
+      hidden: { opacity: 0 },
+      visible: {
+          opacity: 1,
+          transition: { staggerChildren: 0.2 }
+      }
+  };
 
-const cardVariants = {
-  offscreen: {
-    y: 50,
-    opacity: 0
-  },
-  onscreen: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      bounce: 0.4,
-      duration: 0.8
-    }
-  }
-};
+  const itemVariants = {
+      hidden: { opacity: 0, y: 50 },
+      visible: { opacity: 1, y: 0 }
+  };
 
-const Projects = () => {
   return (
-    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-tertiary">
-      <div className="container mx-auto">
-        <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, amount: 0.2 }}
+    <motion.section 
+        id="projects" 
+        className="py-24"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={containerVariants}
+    >
+      <h2 className="section-title">Things I've Built</h2>
+      <motion.div 
+        className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        variants={containerVariants}
+      >
+        {projectData.map((project, i) => (
+          <motion.div 
+            key={i} 
+            className="bg-gray-100 dark:bg-gray-800 border border-transparent dark:border-gray-700 rounded-lg p-6 flex flex-col justify-between shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 hover:-translate-y-2"
+            variants={itemVariants}
             transition={{ duration: 0.5 }}
-        >
-            <p className="text-secondary uppercase tracking-wider">My Work</p>
-            <h2 className="text-4xl md:text-5xl font-bold mt-2">Projects.</h2>
-        </motion.div>
-
-        <div className="mt-12 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              className="group relative overflow-hidden rounded-lg bg-primary shadow-lg"
-              initial="offscreen"
-              whileInView="onscreen"
-              viewport={{ once: true, amount: 0.4 }}
-              variants={cardVariants}
-            >
-              <img src={project.image} alt={project.title} className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6">
-                <h3 className="text-2xl font-bold text-white mb-2">{project.title}</h3>
-                <p className="text-secondary text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 h-0 group-hover:h-auto">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {project.tags.map(tag => <span key={tag} className="px-2 py-1 text-xs bg-gray-700 rounded-full">{tag}</span>)}
-                </div>
-                <div className="flex items-center space-x-4 mt-4">
-                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-white"><FaGithub size={24}/></a>
-                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-white"><FaExternalLinkAlt size={22}/></a>
+          >
+            <div>
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">{project.title}</h3>
+                <div className="flex space-x-3">
+                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="text-gray-500 dark:text-gray-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"><GitHubIcon /></a>
+                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="text-gray-500 dark:text-gray-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"><ExternalLinkIcon /></a>
                 </div>
               </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
+              {project.period && (
+                <div className="mb-2">
+                  <span className="text-sm font-medium text-cyan-600 dark:text-cyan-400">{project.period}</span>
+                </div>
+              )}
+              <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm md:text-base">{project.description}</p>
+            </div>
+            <ul className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-sm text-cyan-600 dark:text-cyan-300">
+              {project.tech.map(t => <li key={t}>{t}</li>)}
+            </ul>
+          </motion.div>
+        ))}
+      </motion.div>
+    </motion.section>
   );
 };
 

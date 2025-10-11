@@ -1,62 +1,64 @@
 import React from 'react';
-import { FiSend } from 'react-icons/fi'; // <-- Add this import line
 import { motion } from 'framer-motion';
+import { GitHubIcon, LinkedInIcon, LeetCodeIcon } from './Icons';
 
-const Contact = () => {
-    const slideIn = (direction, delay) => ({
-        hidden: {
-            x: direction === 'left' ? '-100%' : direction === 'right' ? '100%' : 0,
-            y: direction === 'up' ? '100%' : direction === 'down' ? '-100%' : 0,
-        },
-        show: {
-            x: 0,
-            y: 0,
-            transition: {
-                type: 'spring',
-                stiffness: 40,
-                duration: 1.2,
-                delay: delay,
-            },
-        },
-    });
-
-    return (
-        <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
-            <motion.div
-                className="container mx-auto max-w-4xl p-8 bg-tertiary rounded-xl shadow-2xl"
-                variants={slideIn('up', 0.2)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.25 }}
+const Contact = ({ theme }) => (
+    <motion.section 
+        id="contact" 
+        className="py-24 text-center"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 1 }}
+    >
+        <h2 className="text-lg md:text-xl font-mono text-cyan-400">What's Next?</h2>
+        <h3 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mt-4">Get In Touch</h3>
+        <p className="mt-6 max-w-xl mx-auto text-base md:text-lg text-gray-600 dark:text-gray-300">
+            My inbox is always open. Whether you have a question or just want to say hi,
+            I'll try my best to get back to you! Feel free to reach out about opportunities or collaborations.
+        </p>
+        <motion.a 
+            href="mailto:rajeshtanguturi@gmail.com"
+            className="inline-block mt-10 px-8 py-4 border border-cyan-400 text-cyan-400 rounded-md font-mono text-lg hover:bg-cyan-400/10 transition-colors duration-300"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+        >
+            Say Hello
+        </motion.a>
+        
+        <div className="mt-12 flex justify-center space-x-8">
+            <motion.a 
+                href="https://github.com/RajeshTanguturi" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-600 dark:text-gray-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
             >
-                <p className="text-secondary uppercase tracking-wider">Get in touch</p>
-                <h2 className="text-4xl md:text-5xl font-bold mt-2 mb-8 text-gradient">Contact.</h2>
-
-                <form action="#" method="POST" className="space-y-6">
-                    <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-secondary">Your Name</label>
-                        <input type="text" name="name" id="name" required className="mt-1 block w-full bg-primary border-2 border-tertiary rounded-md py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-accent-pink" />
-                    </div>
-                    <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-secondary">Your Email</label>
-                        <input type="email" name="email" id="email" required className="mt-1 block w-full bg-primary border-2 border-tertiary rounded-md py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-accent-pink" />
-                    </div>
-                    <div>
-                        <label htmlFor="message" className="block text-sm font-medium text-secondary">Message</label>
-                        <textarea id="message" name="message" rows="4" required className="mt-1 block w-full bg-primary border-2 border-tertiary rounded-md py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-accent-pink"></textarea>
-                    </div>
-                    <div>
-                        <button
-                            type="submit"
-                            className="w-full flex justify-center items-center gap-2 py-3 px-4 border border-transparent rounded-md shadow-lg text-lg font-bold text-white bg-gradient-to-r from-accent-pink to-accent-cyan hover:from-pink-600 hover:to-cyan-500 focus:outline-none transition-all duration-300 transform hover:scale-105 hover:shadow-glow-pink"
-                        >
-                            Send Message <FiSend />
-                        </button>
-                    </div>
-                </form>
-            </motion.div>
-        </section>
-    );
-};
+                <GitHubIcon />
+            </motion.a>
+            <motion.a 
+                href="https://www.linkedin.com/in/your-linkedin" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-600 dark:text-gray-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+            >
+                <LinkedInIcon />
+            </motion.a>
+            <motion.a 
+                href="https://leetcode.com/Tanguturi_Rajesh/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-600 dark:text-gray-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+            >
+                <LeetCodeIcon />
+            </motion.a>
+        </div>
+    </motion.section>
+);
 
 export default Contact;

@@ -38,7 +38,7 @@ const Contact = () => {
         </motion.div>
 
         <motion.a
-          href="mailto:rajeshtanguturi@gmail.com"
+          href="mailto:rajeshtanguturi31@gmail.com"
           className="inline-block relative group"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

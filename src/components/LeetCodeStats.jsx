@@ -179,7 +179,7 @@ const LeetCodeStats = () => {
                     <div className="text-4xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
                       24
                     </div>
-                    <div className="text-sm text-gray-500 mt-2">Global Rank: 12,458</div>
+                    <div className="text-sm text-gray-500 mt-2">Global Rank: 196,360/776,241</div>
                   </div>
                 </div>
               </div>

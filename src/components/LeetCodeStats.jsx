@@ -1,22 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-
+import { motion } from 'framer-motion';
 
 const LeetCodeStats = () => {
   const LEETCODE_USERNAME = 'Tanguturi_Rajesh';
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // 🟢 Fallback predefined data
+  const fallbackStats = {
+    totalSolved: 538,
+    totalQuestions: 3721,
+    acceptanceRate: 69.05,
+    ranking: 104.176,
+    easySolved: 237,
+    totalEasy: 908,
+    mediumSolved: 274,
+    totalMedium: 1936,
+    hardSolved: 27,
+    totalHard: 877,
+  };
+
   useEffect(() => {
     const fetchLeetCodeStats = async () => {
       try {
-        const response = await fetch(`https://leetcode-stats-api.herokuapp.com/${LEETCODE_USERNAME}`);
+        const response = await fetch(`https://leetcoe-stats-api.herokuapp.com/${LEETCODE_USERNAME}`);
         const data = await response.json();
-        if (data.status === 'success') {
+
+        if (data.status === 'success' && data.totalSolved) {
           setStats(data);
+        } else {
+          console.warn('Using fallback data (invalid or empty response)');
+          setStats(fallbackStats);
         }
       } catch (err) {
-        console.error(err);
+        console.error('Error fetching LeetCode stats:', err);
+        setStats(fallbackStats);
       } finally {
         setLoading(false);
       }
@@ -25,8 +43,8 @@ const LeetCodeStats = () => {
   }, []);
 
   const StatCard = ({ label, value, total, gradient, delay }) => {
-    const percentage = total > 0 ? (value / total * 100) : 0;
-    
+    const percentage = total > 0 ? (value / total) * 100 : 0;
+
     return (
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -35,11 +53,14 @@ const LeetCodeStats = () => {
         transition={{ duration: 0.6, delay }}
         className="relative group"
       >
-        <div className="absolute inset-0 bg-gradient-to-br opacity-20 group-hover:opacity-30 blur-xl transition-opacity duration-300 rounded-2xl"
-             style={{ background: `linear-gradient(135deg, ${gradient})` }}
+        <div
+          className="absolute inset-0 bg-gradient-to-br opacity-20 group-hover:opacity-30 blur-xl transition-opacity duration-300 rounded-2xl"
+          style={{ background: `linear-gradient(135deg, ${gradient})` }}
         />
         <div className="relative bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 hover:border-cyan-500/50 transition-all duration-300">
-          <div className={`text-5xl font-bold mb-2 bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}>
+          <div
+            className={`text-5xl font-bold mb-2 bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}
+          >
             {value}
           </div>
           <div className="text-gray-300 mb-4">{label}</div>
@@ -53,7 +74,9 @@ const LeetCodeStats = () => {
             />
           </div>
           <div className="flex justify-between mt-2 text-sm text-gray-400">
-            <span>{value} / {total}</span>
+            <span>
+              {value} / {total}
+            </span>
             <span>{percentage.toFixed(1)}%</span>
           </div>
         </div>
@@ -66,11 +89,11 @@ const LeetCodeStats = () => {
       <motion.div
         className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full opacity-20"
         style={{
-          background: "radial-gradient(circle, rgba(34,211,238,0.6) 0%, transparent 70%)",
-          filter: "blur(100px)",
+          background: 'radial-gradient(circle, rgba(34,211,238,0.6) 0%, transparent 70%)',
+          filter: 'blur(100px)',
         }}
         animate={{ rotate: 360 }}
-        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
       />
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -94,10 +117,10 @@ const LeetCodeStats = () => {
             <motion.div
               className="w-16 h-16 border-4 border-cyan-500 border-t-transparent rounded-full"
               animate={{ rotate: 360 }}
-              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
             />
           </div>
-        ) : stats ? (
+        ) : (
           <>
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -179,15 +202,16 @@ const LeetCodeStats = () => {
                     <div className="text-4xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
                       24
                     </div>
-                    <div className="text-sm text-gray-500 mt-2">Global Rank: 12,458</div>
+                    <div className="text-sm text-gray-500 mt-2"></div>
                   </div>
                 </div>
               </div>
             </motion.div>
           </>
-        ) : null}
+        )}
       </div>
     </section>
   );
 };
+
 export default LeetCodeStats;
